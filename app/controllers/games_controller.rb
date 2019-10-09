@@ -10,3 +10,5 @@ class GamesController < ApplicationController
             redirect '/signup'
         end
     end
+
+end
