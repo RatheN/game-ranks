@@ -25,4 +25,15 @@ class GamesController < ApplicationController
         erb :'/games/new'
     end
 
+    get "/games/:id/edit" do 
+        user_game = Game.find_by_id(params[:id]).user
+         if user_game.id == current_user.id
+            @game = Game.find_by_id(params[:id])
+            erb :'games/edit'
+        else 
+            flash[:err] = "You aren't authorized to modify the selected post."
+            redirect "/posts"
+        end
+    end
+
 end
