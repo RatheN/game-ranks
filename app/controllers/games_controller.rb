@@ -31,8 +31,24 @@ class GamesController < ApplicationController
             @game = Game.find_by_id(params[:id])
             erb :'games/edit'
         else 
-            flash[:err] = "You aren't authorized to modify the selected post."
+            flash[:err] = "This is not your review."
             redirect "/games"
+        end
+    end
+
+    patch "/games/:id" do 
+        user_game = Game.find_by_id(params[:id]).user
+        if user_game.id == current_user.id
+            @game = Game.find_by_id(params[:id])
+            params.delete("_method")
+            if @game.update(params)
+                redirect "/games/#{@game.id}"
+            else
+                redirect "/games/#{@game.id}/edit"
+            end
+        else
+            flash[:err] = "This is not your review."
+            erb :"/games/index"
         end
     end
 
