@@ -32,7 +32,7 @@ class GamesController < ApplicationController
             erb :'games/edit'
         else 
             flash[:err] = "You aren't authorized to modify the selected post."
-            redirect "/posts"
+            redirect "/games"
         end
     end
 
