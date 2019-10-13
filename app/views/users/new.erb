@@ -1,12 +1,6 @@
 <br>
 <h2>Create a new account</h2>
 
-<% if @user && @user.errors %>
-    <% @user.errors.full_messages.each do |msg| %>
-        <p style="color: red;">Error</p>
-    <% end %>
-<% end %>
-
 <form method="POST" action="/signup">
     <label for="name">Username: </label>
     <input name="name" id="name" type="text" value="<%= @user ? @user.name : ""%> "/>
