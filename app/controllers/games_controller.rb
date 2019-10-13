@@ -25,6 +25,16 @@ class GamesController < ApplicationController
         erb :'/games/new'
     end
 
+    get '/games/:id' do
+        @game = Game.find_by_id(params[:id])
+
+        if @game 
+            erb :'games/show'
+        else
+            redirect "/games"
+        end
+    end
+
     get "/games/:id/edit" do 
         user_game = Game.find_by_id(params[:id]).user
          if user_game.id == current_user.id
@@ -32,6 +42,16 @@ class GamesController < ApplicationController
             erb :'games/edit'
         else 
             redirect "/games"
+        end
+    end
+
+    post "/games" do
+        @g = current_user.games.build(params)
+        
+        if @g.save
+            redirect "/games"
+        else
+            erb  :"/games/new"
         end
     end
 
@@ -47,26 +67,6 @@ class GamesController < ApplicationController
             end
         else
             erb :"/games/index"
-        end
-    end
-
-    get '/games/:id' do
-        @game = Game.find_by_id(params[:id])
-
-        if @game 
-            erb :'games/show'
-        else
-            redirect "/games"
-        end
-    end
-
-    post "/games" do
-        @g = current_user.games.build(params)
-        
-        if @g.save
-            redirect "/games"
-        else
-            erb  :"/games/new"
         end
     end
 
