@@ -1,0 +1,12 @@
+<h1>Title: <%= @game.title %></h1>
+<p>Genre: <%= @game.genre %></p>
+<br>
+<br>
+<h1>Game Rating: <%= @game.rating %>/100</h1>
+<p><a href="/games/<%= @game.id %>/edit">Edit</a></p>
+<br>
+<br>
+<form method="POST" action="/games/<%= @game.id %>">
+<input type="hidden"  name="_method" value="delete" />
+<input type="submit" value="Delete" />
+</form>

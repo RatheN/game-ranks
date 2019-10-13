@@ -4,15 +4,13 @@ class UsersController < ApplicationController
         erb :'users/new'
     end
 
-    post '/users' do 
-        @user = User.new(params)
-
-        if @user.save
-            session[:user_id] = @user.id
-            redirect "/games"
+    post '/signup' do 
+        if params[:name] == "" || params[:password] == ""
+          redirect to '/signup'
         else
-            erb  :"/users/new"
+          @user = User.create(:name => params[:name], :password => params[:password])
+          session[:user_id] = @user.id
+          redirect '/games'
         end
-
-    end
+      end
 end

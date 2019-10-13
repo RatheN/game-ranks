@@ -3,7 +3,7 @@ class GamesController < ApplicationController
     get '/games' do 
         if logged_in?
             @user = current_user
-            @posts = current_user.games
+            @games = current_user.games
             
             erb :'games/index'
         else
@@ -31,7 +31,6 @@ class GamesController < ApplicationController
             @game = Game.find_by_id(params[:id])
             erb :'games/edit'
         else 
-            flash[:err] = "This is not your review."
             redirect "/games"
         end
     end
@@ -47,8 +46,37 @@ class GamesController < ApplicationController
                 redirect "/games/#{@game.id}/edit"
             end
         else
-            flash[:err] = "This is not your review."
             erb :"/games/index"
+        end
+    end
+
+    get '/games/:id' do
+        @game = Game.find_by_id(params[:id])
+
+        if @game 
+            erb :'games/show'
+        else
+            redirect "/games"
+        end
+    end
+
+    post "/games" do
+        @g = current_user.games.build(params)
+        
+        if @g.save
+            redirect "/games"
+        else
+            erb  :"/games/new"
+        end
+    end
+
+    delete '/games/:id' do
+        user_game = Game.find_by_id(params[:id]).user
+        if user_game.id == current_user.id
+            Game.destroy(params[:id])
+            redirect :'/games'
+        else
+            redirect :'/games'
         end
     end
 
