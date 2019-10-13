@@ -4,6 +4,11 @@ class SessionsController < ApplicationController
         erb :'sessions/login'
     end
 
+    get '/logout' do
+        session.destroy
+        redirect '/login'
+    end
+
     post '/sessions' do
         user = User.find_by(name: params[:name])
 
@@ -15,8 +20,4 @@ class SessionsController < ApplicationController
         end
     end
 
-    get '/logout' do
-        session.destroy
-        redirect '/login'
-    end
 end
