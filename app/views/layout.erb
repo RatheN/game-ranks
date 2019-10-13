@@ -16,14 +16,14 @@
   <body>
     <div class="wrapper">
       <nav>
-        <ul>
+        <ul class="sidebar">
           <% if logged_in? %>
             <li><a href="/games">Home</a></li>
             <li><a href="/games/new">New Game Review</a></li>
             <li><a href="/logout">Logout</a></li>
           <% else %>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/signup">Sign Up</a></li>
+              <li><a href="/login">Login</a></li>
+              <li><a href="/signup">Sign Up</a></li>
           <% end %>
         </ul>
       </nav>
