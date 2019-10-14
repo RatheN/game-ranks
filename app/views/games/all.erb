@@ -1,0 +1,16 @@
+<br>
+<br>
+<h2>All Game Reviews:</h2>
+
+<div class="dropdown">
+<button class="dropbtn">Select a game:</button>
+<div class="dropdown-content">
+    <% @games.each do |g| %>
+        <a href="/games/<%= g.id %>"><%= g.title %></a>
+    <% end %>
+</div>
+</div>
+
+<% @games.each do |g| %>
+    <h3><a href="/games/<%= g.id %>"><%= g.title %></a></h3>
+<% end %>
