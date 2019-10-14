@@ -36,8 +36,8 @@ class GamesController < ApplicationController
     end
 
     get "/games/:id/edit" do 
-        user_game = Game.find_by_id(params[:id]).user
-         if user_game.id == current_user.id
+        gamer = Game.find_by_id(params[:id]).user
+         if gamer.id == current_user.id
             @game = Game.find_by_id(params[:id])
             erb :'games/edit'
         else 
@@ -56,8 +56,8 @@ class GamesController < ApplicationController
     end
 
     patch "/games/:id" do 
-        user_game = Game.find_by_id(params[:id]).user
-        if user_game.id == current_user.id
+        gamer = Game.find_by_id(params[:id]).user
+        if gamer.id == current_user.id
             @game = Game.find_by_id(params[:id])
             params.delete("_method")
             if @game.update(params)
@@ -71,8 +71,8 @@ class GamesController < ApplicationController
     end
 
     delete '/games/:id' do
-        user_game = Game.find_by_id(params[:id]).user
-        if user_game.id == current_user.id
+        gamer = Game.find_by_id(params[:id]).user
+        if gamer.id == current_user.id
             Game.destroy(params[:id])
             redirect :'/games'
         else
