@@ -1,3 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+    .dropbtn {
+    background-color: darkblue;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid lightblue;
+    cursor: pointer;
+    opacity: 1;
+    }
+
+    .dropdown {
+    position: relative;
+    display: inline-block;
+    }
+
+    .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    }
+
+    .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    }
+
+    .dropdown-content a:hover {background-color: #f1f1f1}
+
+    .dropdown:hover .dropdown-content {
+    display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+    background-color: darkblue;
+    opacity: .5;
+    }
+
+</style>
+</head>
+<body>
 
 <h3>Welcome, <%= @user.name %>.</h3>
 <br>
@@ -7,9 +57,21 @@
     <h4>You have not reviewed any games yet.</h4>
     <p><a href="/games/new">create a new game review</a></p>
 <% else %>
+    <div class="dropdown">
+        <button class="dropbtn">Select a game:</button>
+        <div class="dropdown-content">
+            <% @games.each do |g| %>
+                <a href="/games/<%= g.id %>"><%= g.title %></a>
+            <% end %>
+        </div>
+    </div>
+
     <h2>Your game reviews:</h2>
+    
     <% @games.each do |g| %>
         <h3><a href="/games/<%= g.id %>"><%= g.title %></a></h3>
     <% end %>
-    
 <% end %>
+
+</body>
+</html>
