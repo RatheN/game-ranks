@@ -1,6 +1,6 @@
 ## Game Ranks
 
-A Sinatra based application for keeping track of your favorite movies. 🎞
+An app designed to keep track of your favorite games. 
 
 ## About
 
