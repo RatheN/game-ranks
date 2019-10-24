@@ -13,3 +13,8 @@ Clone the file
 Run 'bundle install'
 Run rake db:migrate
 Run shotgun
+
+## Links
+
+[Contributing](CONTRIBUTING.md)
+[License](LICENSE.md)
